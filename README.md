@@ -18,7 +18,8 @@ https://user-images.githubusercontent.com/79006977/129231289-a82c13f4-e2db-4825-
 
 
 ## Full NST with Style Transfer
-This is a result using the full NST. Unfortunately, the results are not as pleasant as the classic NST. This is likely due to the 16x16 patches used for the inputs to the Vision Transformer. Nonetheless, it is interesting to note that there is some form of style being transferred, indicating that the gram matrices of the transformer encodings do represent style of the images.
+This is a result using the full NST. Unfortunately, the results are not as pleasant as the classic NST. This is likely due to the 16x16 image patches used as the inputs to the Vision Transformer. Perhaps the gradient backpropped for each patch is used for all 16x16 pixels. Moreover there is the 'Self-Attention' artefacts as shown above, from the content image reconstruction, further causing distortion to the generated image. Nonetheless, it is interesting to note that there is some form of style being transferred, indicating that the gram matrices of the transformer encodings, do represent the style of the images.
+
 ![NST_overall2](https://user-images.githubusercontent.com/79006977/129229584-6062444d-85f5-4c4d-8f8e-06296097b8e6.jpg)
 
 
