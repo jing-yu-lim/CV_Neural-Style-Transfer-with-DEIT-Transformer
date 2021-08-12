@@ -1,4 +1,4 @@
-# Neural Style Transfer with-DEIT-Transformer
+# Neural Style Transfer with DEIT Transformer
 
 This is an alternative Pytorch Neural Style Transfer implementation, adapted from:
 https://www.pluralsight.com/guides/artistic-neural-style-transfer-with-pytorch
