@@ -6,7 +6,7 @@ https://www.pluralsight.com/guides/artistic-neural-style-transfer-with-pytorch
 Instead of using VGG net's activations for the feature maps for the contentm style and generated images to calculate the loss, the encodings from the DEIT transformer encoders are used
 
 ## Content Image Reconstruction
-The content image reconstruction from noise using DEIT works quite well. However, there are some patches of the images with artifacts. This is likely related to the Self-attention mechanism.
+The content image reconstruction from noise using DEIT works quite well. However, there are some patches of the images with artefacts. This is likely related to the Self-attention mechanism. It is interesting to note that the patch artefacts only appears in the later training steps, with lower loss values
 
 This is available in the second part of the colab notebook in the main code.
 ![content_gen_overall2](https://user-images.githubusercontent.com/79006977/129229839-ce48c412-ecdf-4177-9a23-67a1bc55f2ec.jpg)
@@ -18,7 +18,7 @@ https://user-images.githubusercontent.com/79006977/129231289-a82c13f4-e2db-4825-
 
 
 ## Full NST with Style Transfer
-This is a result using the full NST
+This is a result using the full NST. Unfortunately, the results are not as pleasant as the classic NST. This is likely due to the 16x16 patches used for the inputs to the Vision Transformer. Nonetheless, it is interesting to note that there is some form of style being transferred, indicating that the gram matrices of the transformer encodings do represent style of the images.
 ![NST_overall2](https://user-images.githubusercontent.com/79006977/129229584-6062444d-85f5-4c4d-8f8e-06296097b8e6.jpg)
 
 
