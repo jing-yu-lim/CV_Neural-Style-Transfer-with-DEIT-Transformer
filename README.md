@@ -1,6 +1,6 @@
 # Neural Style Transfer with DEIT Transformer
 
-This is an alternative Pytorch Neural Style Transfer implementation, adapted from:
+This is an alternative Pytorch Neural Style Transfer(NST) implementation, adapted from:
 https://www.pluralsight.com/guides/artistic-neural-style-transfer-with-pytorch
 
 Instead of using VGG net's activations for the feature maps for the contentm style and generated images to calculate the loss, the encodings from the DEIT transformer encoders are used
@@ -17,7 +17,7 @@ https://user-images.githubusercontent.com/79006977/129231289-a82c13f4-e2db-4825-
 
 
 
-## Full NST with Style Transfer
+## Full Neural Style Transfer
 This is a result using the full NST. Unfortunately, the results are not as pleasant as the classic NST. This is likely due to the 16x16 image patches used as the inputs to the Vision Transformer. Perhaps the gradient backpropped for each patch is used for all 16x16 pixels. Moreover there is the 'Self-Attention' artefacts as shown above, from the content image reconstruction, further causing distortion to the generated image. Nonetheless, it is interesting to note that there is some form of style being transferred, indicating that the gram matrices of the transformer encodings, do represent the style of the images.
 
 ![NST_overall2](https://user-images.githubusercontent.com/79006977/129229584-6062444d-85f5-4c4d-8f8e-06296097b8e6.jpg)
