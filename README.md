@@ -1,6 +1,7 @@
 # Neural Style Transfer with DEIT Transformer
 
-This is an alternative Pytorch Neural Style Transfer(NST) implementation, adapted from the link below, and implemented using Facebook's Data Efficient Image Transformer (DEIT)
+This is an alternative Pytorch Neural Style Transfer(NST) implementation, adapted from the link below, and implemented using Facebook's Data Efficient Image Transformer (DEIT).
+
 https://www.pluralsight.com/guides/artistic-neural-style-transfer-with-pytorch
 
 Instead of using VGG net's layer activations of the content, style and generated images to calculate loss, the encodings from the DEIT transformer encoders are used
