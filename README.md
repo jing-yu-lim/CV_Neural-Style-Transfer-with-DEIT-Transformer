@@ -42,6 +42,7 @@ https://user-images.githubusercontent.com/79006977/129231323-bd6552ec-f595-425b-
 ## Gram Matrix for Transformers
 ![image](https://user-images.githubusercontent.com/79006977/129343837-f02ac83c-94d7-4a15-b73d-ec55fa9ad59f.png)
 (https://towardsdatascience.com/introduction-to-neural-style-transfer-with-tensorflow-99915a5d624a)
+
 In classic NST, the Gram Matrix of the feature maps for the images represents the style of the image. It is implemented by matrix multiplation of a feature map with its height and width flattened, with the shape of (n_C, n_H x n_W), and its transpose. 
 
 The intuition of retrieving the gram matrix from the Vision Transformer encodings was based on how the centre-cropped 224x224 input images were tokenized into 16x16 image patches (which are flattened), with a default embedding dimension of 768.
