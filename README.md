@@ -1,8 +1,6 @@
 # Neural Style Transfer with DEIT Transformer
 
-This is an alternative Pytorch Neural Style Transfer(NST) implementation, adapted from the link below, and implemented using Facebook's Data Efficient Image Transformer (DEIT). 
-
-https://www.pluralsight.com/guides/artistic-neural-style-transfer-with-pytorch
+This is an alternative Pytorch Neural Style Transfer(NST) implementation, adapted from this [link](https://www.pluralsight.com/guides/artistic-neural-style-transfer-with-pytorch), and implemented using Facebook's Data Efficient Image Transformer (DEIT). 
 
 Instead of using VGG net's layer activations of the content, style and generated images to calculate loss, the encodings from the DEIT transformer encoders are used
 
@@ -12,14 +10,17 @@ The content image reconstruction from noise using DEIT works quite well. However
 It is also interesting that this works much better than the overall NST (below), and does not suffer from the same problem of the image becoming very low resolution and patch-ey. While this phenomenon occurs at the start of reconstructing the image, the patch-ey effects quickly wanes.
 
 ### Results using single transformer block encodings:
-![content_gen_overall2](https://user-images.githubusercontent.com/79006977/129229839-ce48c412-ecdf-4177-9a23-67a1bc55f2ec.jpg)
-
+<p align="center">
+<img width="725" height="353" src="https://user-images.githubusercontent.com/79006977/129229839-ce48c412-ecdf-4177-9a23-67a1bc55f2ec.jpg">
+</p>
 
 https://user-images.githubusercontent.com/79006977/129231289-a82c13f4-e2db-4825-b048-baf6550b35e0.mp4
 
 ### Results using ALL transformer block encodings:
 
-![content_gen_overall](https://user-images.githubusercontent.com/79006977/129294982-cc528cdb-3422-4f10-8e78-b23974f2de8e.jpg)
+<p align="center">
+<img width="725" height="353" src="https://user-images.githubusercontent.com/79006977/129294982-cc528cdb-3422-4f10-8e78-b23974f2de8e.jpg">
+</p>
 
 https://user-images.githubusercontent.com/79006977/129294941-a9786a08-d035-40b6-8102-fa089a02f536.mp4
 
@@ -43,10 +44,10 @@ https://user-images.githubusercontent.com/79006977/129231323-bd6552ec-f595-425b-
 ![image](https://user-images.githubusercontent.com/79006977/129343837-f02ac83c-94d7-4a15-b73d-ec55fa9ad59f.png)
 (https://towardsdatascience.com/introduction-to-neural-style-transfer-with-tensorflow-99915a5d624a)
 
-In classic NST, the Gram Matrix of the feature maps for the images represents the style of the image. It is implemented by matrix multiplation of a feature map with its height and width flattened, with the shape of (n_C, n_H x n_W), and its transpose. 
+In classic NST, the Gram Matrix of the feature maps for the images represents the style of the image. It is implemented by matrix multiplation of a feature map with its height and width flattened (shape of (n_C, n_H x n_W)), and its transpose. 
 
-The intuition of retrieving the gram matrix from the Vision Transformer encodings was based on how the centre-cropped 224x224 input images were tokenized into 16x16 image patches (which are flattened), with a default embedding dimension of 768.
+The intuition of retrieving the gram matrix from the Vision Transformer encodings was based on how the centre-cropped 224x224 input images were tokenized into 16x16 image patches (which are flattened), with an embedding dimension of 768.
 
-A 2D Conv net with a Kernel size of 16, Stride of 16, input channel of 3 and output channel of 768 was used in Vision Transformer for the aforementioned tokenization. Height and width dimensions are then flattened. The result is a set of 'feature maps' with the shape (1 , 196, 768). A class token is concatenated with the 'feature map', and the final shape of the encodings is (1, 197, 768). Subsequent transformer blocks' encodings share the same shape as the Multi-Head Attention mechanism can be intuited to be making the tokens be more expressive.
+A 2D Conv net with a Kernel size of 16, Stride of 16, input channel of 3 and output channel of 768 was used in Vision Transformer for the aforementioned tokenization. Height and width dimensions are then flattened. The result is a set of 'feature maps' with the shape (1 , 196, 768). A class token is concatenated with this 'feature map', and the final shape of the transformer input tokens is (1, 197, 768). Subsequent transformer blocks' encodings share the same shape as the Multi-Head Attention mechanism can be intuited to be making the tokens more expressive.
 
-Hence, the 768 embedding dimension of the encodings can be interpreted as the number of 'channels' of the 'feature maps', and the 197 dimension is the flattened  n_H x n_W dimensions. The gram matrix was thus obtained by manipulating the encodings to a shape of (768,196), and matrix mutlplying it with its transpose.
+Hence, the 768 embedding dimension of the encodings can be interpreted as the number of 'channels' of the 'feature maps', and the 197 dimension is simply the flattened  n_H x n_W dimensions plus a positional encoding. The gram matrix was thus obtained by manipulating the encodings to a shape of (embed_dim, H * W) i.e. (768, 197), and matrix mutlplying it with its transpose.
